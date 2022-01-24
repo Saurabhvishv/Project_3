@@ -84,8 +84,8 @@ const genrateShortUrl = async function (req, res) {
 
 const getUrl = async function (req, res) {
     try {
-        let urlCode = req.params.urlCode.toLowerCase()
-        let urlData = await urlModel.findOne({ urlCode: urlCode })
+        let urlCode = await GET_ASYNC (req.params.urlCode);
+        let urlData = await urlModel.findOne({urlCode: req.params.urlCode})
         if (!urlData) {
             return res.status(400).send({ status: false, msg: "this short url does not exist please provide valid url code " })
         }
